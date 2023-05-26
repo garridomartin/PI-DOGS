@@ -29,9 +29,9 @@ module.exports = (sequelize) => {
       },
       imagen: {
         type: DataTypes.STRING,
-        /*validate: {
+        validate: {
           isUrl: true,
-        },*/
+        },
         allowNull: false,
       },
       created: { type: DataTypes.BOOLEAN, defaultValue: true },

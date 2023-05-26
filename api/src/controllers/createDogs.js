@@ -6,7 +6,6 @@ const createDog = async (
   altura,
   peso,
   expectativaDeVida,
-  temperamento,
   imagen,
   created
 ) => {
@@ -16,7 +15,6 @@ const createDog = async (
     altura,
     peso,
     expectativaDeVida,
-    temperamento,
     imagen,
     created,
   });

@@ -1,6 +1,7 @@
 const { getAllDogs } = require("../controllers/getAllDogs");
 const { getDogsByIdRaza } = require("../controllers/getDogsByIdRaza");
 const { searchDogsByName } = require("../controllers/searchDogsByName");
+const { getTemperaments } = require("../controllers/getTemperaments");
 
 const getDogsHandler = async (req, res) => {
   const { name } = req.query; //name es la raza de un perro que desee buscar por query
@@ -28,8 +29,14 @@ const getDogsByIdHandler = async (req, res) => {
   //res.send(`NIY: estoy en posts detail by ${idRaza}`);
 };
 
-const getTemperamentsHandler = (req, res) => {
-  res.send(`NIY: estoy en posts temperaments`);
+const getTemperamentsHandler = async (req, res) => {
+  try {
+    const temperaments = await getTemperaments();
+    res.status(200).json(temperaments);
+  } catch (error) {
+    console.error(error);
+    res.status(400).json({ error: error.message });
+  }
 };
 
 module.exports = {
