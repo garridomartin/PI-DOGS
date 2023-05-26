@@ -1,8 +1,9 @@
-const { createDog } = require("../controllers/dogsController");
+const { createDog } = require("../controllers/createDogs");
 
 const postDogsHandler = async (req, res) => {
   try {
-    const { ID, name, altura, peso, expectativaDeVida, imagen } = req.body;
+    const { ID, name, altura, peso, expectativaDeVida, imagen, created } =
+      req.body;
     console.log(req.body);
     const newDog = await createDog(
       ID,
@@ -10,7 +11,8 @@ const postDogsHandler = async (req, res) => {
       altura,
       peso,
       expectativaDeVida,
-      imagen
+      imagen,
+      created
     );
     res.status(201).json(newDog);
   } catch (error) {

@@ -12,7 +12,7 @@ server.use(express.json()); //!IMPORTANTE: convierte la info a objeto json, para
 server.use(morgan("dev"));
 
 server.use((req, res, next) => {
-  console.log("ESTOY PASANDO POR EL MIDDLEWARE"); //prueba que estamos recibiendo la request
+  //console.log("ESTOY PASANDO POR EL MIDDLEWARE"); //prueba que estamos recibiendo la request
   next();
 });
 

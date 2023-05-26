@@ -1,4 +1,4 @@
-const { DataTypes } = require("sequelize");
+const { DataTypes, BOOLEAN } = require("sequelize");
 
 module.exports = (sequelize) => {
   // defino el modelo
@@ -16,18 +16,25 @@ module.exports = (sequelize) => {
         allowNull: false,
       },
       altura: {
-        type: DataTypes.DECIMAL(10, 2),
+        type: DataTypes.STRING,
         allowNull: false,
       },
       peso: {
-        type: DataTypes.DECIMAL(10, 2),
+        type: DataTypes.STRING,
         allowNull: false,
       },
       expectativaDeVida: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.STRING,
         allowNull: false,
       },
-      imagen: { type: DataTypes.STRING },
+      imagen: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+          isUrl: true,
+        },
+      },
+      created: { type: DataTypes.BOOLEAN, defaultValue: true },
     },
     { timestamps: false }
   );
