@@ -3,7 +3,7 @@ const { DataTypes, BOOLEAN } = require("sequelize");
 module.exports = (sequelize) => {
   // defino el modelo
   sequelize.define(
-    "dogs",
+    "Dogs",
     {
       id: {
         type: DataTypes.UUID,
@@ -27,6 +27,7 @@ module.exports = (sequelize) => {
         type: DataTypes.STRING,
         allowNull: false,
       },
+
       imagen: {
         type: DataTypes.STRING,
         validate: {

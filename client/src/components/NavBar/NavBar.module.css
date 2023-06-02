@@ -1,0 +1,10 @@
+.mainContainer {
+  display: flex;
+  background-color: rgb(167, 167, 234);
+  flex-direction: row;
+  text-align: justify;
+  text-decoration-color: aliceblue;
+  justify-content: space-around;
+  border-radius: 15px;
+  border: 1px solid;
+}

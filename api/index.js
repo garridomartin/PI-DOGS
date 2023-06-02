@@ -18,13 +18,11 @@
 //                       `=---='
 //     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 const server = require("./src/app.js");
-const { sequelize } = require("./src/db.js");
-const PORT = process.env.PORT;
+const { conn } = require("./src/db.js");
 
 // Syncing all the models at once.
-sequelize.sync({ force: true }).then(() => {
-  //solo force la primera inicialiacion, para que cree las tablas y sus entradas. Luego alter
-  server.listen(PORT || 3001, () => {
-    console.log(`listening on port ${PORT}`); // eslint-disable-line no-console
+conn.sync({ force: true }).then(() => {
+  server.listen(3001, () => {
+    console.log("Listening on PORT 3001"); // eslint-disable-line no-console
   });
 });

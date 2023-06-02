@@ -1,24 +1,48 @@
-const { dogs } = require("../db");
-const { temperaments } = require("../db");
+const { Dogs } = require("../db");
+const { Temperaments } = require("../db");
 const axios = require("axios");
 const { API_KEY, URL_BASE } = process.env;
 const cleanArray = require("./cleanArray");
 
 const getAllDogs = async () => {
-  const databaseDogs = await dogs.findAll({
-    include: {
-      model: temperaments,
-      attributes: ["name"],
-      through: {
-        attributes: [],
+  try {
+    const databaseDogs = await Dogs.findAll({
+      attributes: [
+        "id",
+        "name",
+        "altura",
+        "peso",
+        "expectativaDeVida",
+        "imagen",
+        "created",
+      ],
+      include: {
+        model: Temperaments,
+        attributes: ["name"],
+        through: {
+          attributes: [],
+        },
       },
-    },
-  });
+    });
 
-  const apiDogsRaw = (await axios.get(`${URL_BASE}?api_key=${API_KEY}`)).data;
-  const apiDogs = cleanArray(apiDogsRaw);
+    //para que los temperamentos se muestren como array
+    const transformedDatabaseDogs = databaseDogs.map((dog) => {
+      const temperaments = dog.Temperaments.map((temp) => temp.name);
+      const { Temperaments, ...dogWithoutTemperaments } = dog.toJSON();
+      return { ...dogWithoutTemperaments, temperaments };
+    });
 
-  return [...databaseDogs, ...apiDogs].flat(); //con flat evitono haya arrays anidados y se devuelve el resultado de la función.
+    const apiDogsRaw = (await axios.get(`${URL_BASE}?api_key=${API_KEY}`)).data;
+    const apiDogs = cleanArray(apiDogsRaw);
+
+    return [...transformedDatabaseDogs, ...apiDogs].flat(); //con flat evitono haya arrays anidados y se devuelve el resultado de la función.
+  } catch (error) {
+    console.error(error);
+    throw {
+      status: 500,
+      message: "Error retrieving dogs data.",
+    };
+  }
 };
 
 module.exports = { getAllDogs };

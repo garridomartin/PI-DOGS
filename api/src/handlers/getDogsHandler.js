@@ -19,7 +19,7 @@ const getDogsHandler = async (req, res) => {
 
 const getDogsByIdHandler = async (req, res) => {
   const { idRaza } = req.params;
-  const source = isNaN(idRaza) ? "bdd" : "api";
+  const source = isNaN(idRaza) ? "bdd" : "api"; //SI EL ID NO ES UN NUEMRO, BUSCA EN bdd, SI LO ES, EN LA API
   try {
     const dogs = await getDogsByIdRaza(idRaza, source);
     res.status(200).json(dogs);

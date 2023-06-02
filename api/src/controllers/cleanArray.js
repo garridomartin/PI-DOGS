@@ -27,6 +27,3 @@ const cleanArray = (arr) =>
   });
 
 module.exports = cleanArray;
-
-/*if (elem.reference_image_id) {
-  elem.image = `https://cdn2.thedogapi.com/images/${elem.reference_image_id}.jpg`};*/
