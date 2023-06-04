@@ -1,24 +1,41 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import style from './SearchBar.module.css';
+import axios from 'axios';
+import { useSelector, useDispatch } from 'react-redux';
+//import { filterByTemperament } from '../../redux/actions';
 
 const SearchBar = () => {
-  const [orderByName, setOrderByName] = useState('A-->Z');
-  const [orderByWeight, setOrderByWeight] = useState('kg-->KG');
+  const [orderByName, setOrderByName] = useState('A→Z');
+  const [orderByWeight, setOrderByWeight] = useState('kg→KG');
   const [searchValue, setSearchValue] = useState('');
+  const temperaments = useSelector((state) => state.temperaments);
+  //const dispatch = useDispatch();
+  //obtengo todos los temperamentos, que los mandaré al select↓↓↓↓
+  useEffect(() => {
+    const fetchTemperaments = async () => {
+      try {
+        await axios.get('http://localhost:3001/temperaments');
+        // dispatch(setTemperaments(response.data));
+      } catch (error) {
+        console.error('Error al obtener los temperamentos:', error);
+      }
+    };
+    fetchTemperaments();
+  }, []);
 
   const handleNameOrder = () => {
-    if (orderByName === 'A-->Z') {
-      setOrderByName('Z-->A');
+    if (orderByName === 'A→Z') {
+      setOrderByName('Z→A');
     } else {
-      setOrderByName('A-->Z');
+      setOrderByName('A→Z');
     }
   };
 
   const handleWeightOrder = () => {
-    if (orderByWeight === 'kg-->KG') {
-      setOrderByWeight('KG-->kg');
+    if (orderByWeight === 'kg→KG') {
+      setOrderByWeight('KG→kg');
     } else {
-      setOrderByWeight('kg-->KG');
+      setOrderByWeight('kg→KG');
     }
   };
 
@@ -26,8 +43,12 @@ const SearchBar = () => {
     setSearchValue(event.target.value);
   };
 
+  /*const handleTemperamentChange = (event) => {
+    const selectedTemperament = event.target.value;
+    dispatch(filterByTemperament(selectedTemperament));
+  };*/
+
   const handleSearch = () => {
-    // Aquí puedes realizar la acción de búsqueda con el valor ingresado
     console.log('Realizando búsqueda con el valor:', searchValue);
   };
 
@@ -52,6 +73,12 @@ const SearchBar = () => {
       <button onClick={handleWeightOrder}>{orderByWeight}</button>
       <select>
         <option value='temperament'>Temperamento</option>
+        {temperaments &&
+          temperaments.map((temperament) => (
+            <option key={temperament.id} value={temperament.name}>
+              {temperament.name}
+            </option>
+          ))}
       </select>
     </div>
   );

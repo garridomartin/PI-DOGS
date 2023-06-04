@@ -3,13 +3,7 @@
   flex-wrap: wrap;
   justify-content: space-between;
   gap: 1em;
-  max-width: 1100px; /* Ajusta el ancho máximo del contenedor principal según tus necesidades */
-  margin: 0 auto; /* Centra el contenedor en la página */
-}
-
-@media (max-width: 768px) {
-  .CardsContainer {
-    max-width: 100%; /* Ajusta el ancho máximo del contenedor para dispositivos móviles */
-    padding: 0 10px; /* Agrega un poco de espacio en los lados del contenedor en dispositivos móviles */
-  }
+  max-width: 1100px;
+  margin: 0 auto;
+  padding-top: 1em;
 }
