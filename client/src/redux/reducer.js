@@ -1,23 +1,28 @@
-import { GET_DOGS, FILTER_BY_TEMPERAMENT, GET_DOGS_BY_ID } from './actions';
+import {
+  GET_DOGS,
+  GET_DOGS_BY_ID,
+  GET_TEMPERAMENTS,
+  FILTER_BY_VALUE,
+  FILTER_CREATED,
+  FILTER_BY_TEMPERAMENT,
+  SEARCH_NAME,
+  DOGS_DETAIL,
+  POST_DOG,
+  ORDER_BY_NAME,
+} from './indexTypes';
 
 const initialState = {
   dogs: [],
-  statusFiltered: 'temperament',
+  backupDogs: [],
+  temperaments: [],
+  detail: [],
 };
 
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
     case GET_DOGS:
       return { ...state, dogs: action.payload };
-    case GET_DOGS_BY_ID:
-      return { ...state, dogs: action.payload };
-    case FILTER_BY_TEMPERAMENT:
-      const allDogs = state.dogs;
-      const statusFiltered =
-        action.payload === 'temperament'
-          ? allDogs
-          : allDogs.filter((el) => el.status === action.payload);
-      return { ...state, statusFiltered };
+
     default:
       return { ...state };
   }

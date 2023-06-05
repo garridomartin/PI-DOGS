@@ -21,3 +21,23 @@ export const getDogs = () => {
     dispatch({ type: GET_DOGS, payload: dogs });
   };
 };
+
+export const getDogById = (id) => {
+  return async function (dispatch) {
+    const apiData = await axios.get(`${URL_BASE}/dogs/${id}`);
+    const dogById = apiData.data;
+    dispatch({ type: GET_DOGS_BY_ID, payload: dogById });
+  };
+};
+
+export function orderByName(payload) {
+  return {
+    type: ORDER_BY_NAME,
+    payload,
+  };
+}
+
+export const filterByTemperament = (payload) => {
+  console.log(payload);
+  return { type: FILTER_BY_TEMPERAMENT, payload };
+};

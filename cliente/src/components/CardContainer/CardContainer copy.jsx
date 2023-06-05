@@ -1,3 +1,5 @@
+// hasta aca funcionta todo bien, incluso la searchBar y el paginado
+
 import Card from '../Card/Card';
 import style from './CardContainer.module.css';
 import { useSelector, useDispatch } from 'react-redux';
