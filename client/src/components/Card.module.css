@@ -1,7 +1,7 @@
 .Card {
   border: 1px solid black;
-  flex-basis: calc(15% + 7%); /* Aumentar el ancho en un 15% */
-  height: auto; /* Ajustar la altura automáticamente */
+  flex-basis: calc(15% + 7%);
+  height: auto;
   border-radius: 0;
   padding: 2px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
@@ -11,6 +11,17 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+}
+
+.Card:hover {
+  box-shadow: 0 0 18px rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(8px);
+  background-color: #a0d995;
+  transition: all 0.3s ease-in-out;
+}
+
+.Card:hover {
+  transform: scale(1.1);
 }
 
 @media (max-width: 1200px) {
@@ -39,17 +50,19 @@
   width: auto%;
   height: 100%;
   max-width: 100%;
-  max-height: calc(100% - 30px); /* Ajustar la altura máxima de la imagen */
+  max-height: calc(100% - 30px);
   object-fit: contain;
   border-radius: 0;
 }
 
 .Card .Title {
   font-weight: bold;
-  font-size: 1.2rem; /* Aumentar el tamaño de fuente del nombre */
+  font-size: 1.2rem;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 .Card p:not(.Title) {
   margin: 1px 0;
-  font-size: 1rem; /* Ajustar el tamaño de fuente de los demás textos */
+  font-size: 1rem;
+  font-family: Arial, Helvetica, sans-serif;
 }
