@@ -1,4 +1,4 @@
-const { createDog } = require("../controllers/createDogs");
+const { createDog } = require('../controllers/createDogs');
 
 const postDogsHandler = async (req, res) => {
   try {
@@ -16,7 +16,7 @@ const postDogsHandler = async (req, res) => {
     if (!name || !altura || !peso || !expectativaDeVida || !temperamento) {
       return res
         .status(400)
-        .json({ error: "Required fields are missing to create a new dog." });
+        .json({ error: 'Required fields are missing to create a new dog.' });
     }
     const newDog = await createDog(
       ID,
@@ -29,7 +29,7 @@ const postDogsHandler = async (req, res) => {
       created
     );
     res.status(201).json(newDog);
-    console.log("perro creado exitosamente");
+    console.log('perro creado exitosamente');
   } catch (error) {
     res.status(400).json({ error: error.message });
   }

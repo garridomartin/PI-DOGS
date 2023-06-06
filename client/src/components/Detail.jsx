@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams, Link } from 'react-router-dom';
-import { dogsDetail } from '../redux/actions';
+import { dogsDetail, clearDetail } from '../redux/actions';
 import style from './Detail.module.css';
 
 const Detail = () => {
@@ -13,27 +13,44 @@ const Detail = () => {
     dispatch(dogsDetail(id));
   }, [dispatch, id]);
 
+  const handleClearDetail = () => {
+    dispatch(clearDetail());
+  };
+
+  // Verificar si dogDetail es un objeto y convertirlo en un array si es necesario
+  const dogDetailArray = Array.isArray(dogDetail) ? dogDetail : [dogDetail];
+
+  if (!dogDetailArray.length) {
+    return <div>Loading...</div>; // O mostrar un indicador de carga mientras se espera la respuesta
+  }
+  console.log(dogDetail);
+  console.log(dogDetailArray);
   return (
     <div className={style.cuerpoTarjeta}>
-      {dogDetail &&
-        dogDetail.map((dog) => (
-          <div key={dog.ID} className={style.card}>
+      {dogDetailArray.map((dog) => (
+        <div key={dog.id} className={style.card}>
+          {dog.imagen && (
             <img src={dog.imagen} alt={dog.name} className={style.image} />
-            <div>
-              <h3 className={style.title}>{dog.name}</h3>
-              <p className={style.text}>Altura: {dog.altura} cm.</p>
-              <p className={style.text}>Peso: {dog.peso} kg.</p>
-              <p className={style.text}>
-                Expectativa de vida: {dog.expectativaDeVida}
-              </p>
+          )}
+          <div>
+            <h3 className={style.title}>{dog.name}</h3>
+            <p className={style.text}>Altura: {dog.altura} cm.</p>
+            <p className={style.text}>Peso: {dog.peso} kg.</p>
+            <p className={style.text}>
+              Expectativa de vida: {dog.expectativaDeVida}
+            </p>
+            {dog.temperamento && (
               <p className={style.text}>
                 Temperamento: {dog.temperamento.join(', ')}
               </p>
-            </div>
+            )}
           </div>
-        ))}
+        </div>
+      ))}
       <Link to='/home'>
-        <button className={style.link}>Press HERE to go back</button>
+        <button className={style.link} onClick={handleClearDetail}>
+          Press HERE to go back
+        </button>
       </Link>
     </div>
   );

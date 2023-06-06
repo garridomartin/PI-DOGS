@@ -1,24 +1,24 @@
-const { Dogs } = require("../db");
-const { Temperaments } = require("../db");
-const axios = require("axios");
+const { Dogs } = require('../db');
+const { Temperaments } = require('../db');
+const axios = require('axios');
 const { API_KEY, URL_BASE } = process.env;
-const cleanArray = require("./cleanArray");
+const cleanArray = require('./cleanArray');
 
 const getAllDogs = async () => {
   try {
     const databaseDogs = await Dogs.findAll({
       attributes: [
-        "id",
-        "name",
-        "altura",
-        "peso",
-        "expectativaDeVida",
-        "imagen",
-        "created",
+        'id',
+        'name',
+        'altura',
+        'peso',
+        'expectativaDeVida',
+        'imagen',
+        'created',
       ],
       include: {
         model: Temperaments,
-        attributes: ["name"],
+        attributes: ['name'],
         through: {
           attributes: [],
         },
@@ -27,9 +27,9 @@ const getAllDogs = async () => {
 
     //para que los temperamentos se muestren como array
     const transformedDatabaseDogs = databaseDogs.map((dog) => {
-      const temperaments = dog.Temperaments.map((temp) => temp.name);
+      const temperamento = dog.Temperaments.map((temp) => temp.name);
       const { Temperaments, ...dogWithoutTemperaments } = dog.toJSON();
-      return { ...dogWithoutTemperaments, temperaments };
+      return { ...dogWithoutTemperaments, temperamento };
     });
 
     const apiDogsRaw = (await axios.get(`${URL_BASE}?api_key=${API_KEY}`)).data;
@@ -40,7 +40,7 @@ const getAllDogs = async () => {
     console.error(error);
     throw {
       status: 500,
-      message: "Error retrieving dogs data.",
+      message: 'Error retrieving dogs data.',
     };
   }
 };

@@ -8,11 +8,13 @@ import {
   Paginado,
   FilterByAlphabet,
   FilterByWeight,
+  SearchBar,
 } from '../containers/index';
 import style from './Home.module.css';
 
 const Home = () => {
   const allDogs = useSelector((state) => state.dogs);
+  //console.log(allDogs[0].temperamento);
   const [order, setOrder] = useState(1);
   const [currentPage, setCurrentPage] = useState(1);
   const [dogsPerPage] = useState(8);
@@ -37,31 +39,12 @@ const Home = () => {
     event.preventDefault();
     dispatch(getDogs());
   };
-  /*
-  //!RESET FILTERS
-  const    = () => {
-    setOrder('');
-    setCurrentPage(1);
-  };
-  const handleResetFilters = () => {
-    resetFilters();
-    dispatch(getDogs());
-  };
 
-  //!FILTRO ALFABETICO
-  const handleOrderChange = (event) => {
-    const selectedOrder = event.target.value;
-    setOrder(selectedOrder);
-  };
-*/
   return (
     <div className={style.container}>
-      <button
-        className={style.button}
-        onClick={() => (window.location.href = '/create')}
-      >
-        CREAR PERRO
-      </button>
+      <div>
+        <SearchBar />
+      </div>
       <button className={style.button} onClick={handleClick}>
         RESET FILTERS
       </button>
@@ -90,11 +73,11 @@ const Home = () => {
         paginado={paginado}
       />
       <div className={style.CardsContainer}>
-        {currentDogs &&
+        {currentDogs[0] ? (
           currentDogs.map((dog) => (
             <Card
-              key={dog.ID}
-              id={dog.ID}
+              key={dog.id}
+              id={dog.id}
               name={dog.name}
               altura={dog.altura}
               peso={dog.peso}
@@ -102,7 +85,10 @@ const Home = () => {
               temperamento={dog.temperamento}
               imagen={dog.imagen}
             />
-          ))}
+          ))
+        ) : (
+          <p>...</p>
+        )}
       </div>
     </div>
   );

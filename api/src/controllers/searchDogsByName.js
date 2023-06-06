@@ -1,8 +1,8 @@
-const { Dogs, Temperaments } = require("../db");
-const axios = require("axios");
+const { Dogs, Temperaments } = require('../db');
+const axios = require('axios');
 const { API_KEY, URL_BASE } = process.env;
-const cleanArray = require("./cleanArray");
-const Sequelize = require("sequelize");
+const cleanArray = require('./cleanArray');
+const Sequelize = require('sequelize');
 const Op = Sequelize.Op;
 
 //BUSCO PERROS EN LA BASE DE DATOS, EN LA TABLA  Dogs.
@@ -15,7 +15,7 @@ const searchDogsByName = async (name) => {
     },
     include: {
       model: Temperaments,
-      attributes: ["name"],
+      attributes: ['name'],
       through: {
         attributes: [],
       },
@@ -38,8 +38,8 @@ const searchDogsByName = async (name) => {
 
   const dogsWithTemperaments = mergedDogs.map((dog) => {
     if (dog.Temperaments && dog.Temperaments.length > 0) {
-      const temperaments = dog.Temperaments.map((temp) => temp.name);
-      return { ...dog.toJSON(), temperaments };
+      const temperamento = dog.Temperaments.map((temp) => temp.name);
+      return { ...dog.toJSON(), temperamento };
     } else {
       return dog;
     }

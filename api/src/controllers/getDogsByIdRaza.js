@@ -1,11 +1,11 @@
-const axios = require("axios");
+const axios = require('axios');
 const { API_KEY, URL_BASE } = process.env;
-const { Dogs, Temperaments } = require("../db");
-const cleanArray = require("./cleanArray");
+const { Dogs, Temperaments } = require('../db');
+const cleanArray = require('./cleanArray');
 
 const getDogsByIdRaza = async (idRaza, source) => {
   const dog =
-    source === "api" //BUSQUEDA EN LA API
+    source === 'api' //BUSQUEDA EN LA API
       ? cleanArray([
           await (
             await axios.get(`${URL_BASE}/${idRaza}?api_key=${API_KEY}`)
@@ -16,7 +16,7 @@ const getDogsByIdRaza = async (idRaza, source) => {
           include: [
             {
               model: Temperaments,
-              attributes: ["name"],
+              attributes: ['name'],
               through: {
                 attributes: [],
               },
@@ -31,11 +31,12 @@ const getDogsByIdRaza = async (idRaza, source) => {
   }
 
   if (dog && dog.Temperaments) {
-    const temperaments = dog.Temperaments.map((temp) => temp.name);
-    const dogWithTemperaments = { ...dog.toJSON(), temperaments };
+    const temperamento = dog.Temperaments.map((temp) => temp.name);
+    const dogWithTemperaments = { ...dog.toJSON(), temperamento };
     delete dogWithTemperaments.Temperaments;
     return dogWithTemperaments;
   }
+
   return dog;
 };
 

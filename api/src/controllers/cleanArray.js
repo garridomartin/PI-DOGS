@@ -13,16 +13,16 @@ const cleanArray = (arr) =>
     }
 
     return {
-      ID: elem.id,
+      id: elem.id,
       name: elem.name,
       altura: elem.height.metric,
       peso: elem.weight.metric,
       expectativaDeVida: elem.life_span,
       expectativaDeVida_min: elem.life_span_min,
       expectativaDeVida_max: elem.life_span_max,
-      temperamento: elem.temperament ? elem.temperament.split(", ") : [],
       imagen,
       created: false,
+      temperamento: elem.temperament ? elem.temperament.split(', ') : [],
     };
   });
 

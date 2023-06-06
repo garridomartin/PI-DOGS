@@ -3,19 +3,19 @@ import {
   ORDER_BY_NAME,
   ORDER_BY_WEIGHT,
   DOGS_DETAIL,
-  GET_DOGS_BY_ID,
+  SEARCH_NAME,
+  CLEAR_DETAIL,
+  CREATE_DOG,
   GET_TEMPERAMENTS,
   FILTER_CREATED,
   FILTER_BY_TEMPERAMENT,
-  SEARCH_NAME,
-  POST_DOG,
 } from './indexTypes';
 
 const initialState = {
   dogs: [],
+  detail: [],
   backupDogs: [],
   temperaments: [],
-  detail: [],
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -61,9 +61,28 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         detail: action.payload,
       };
+    case SEARCH_NAME:
+      return {
+        ...state,
+        dogs: action.payload,
+      };
+    case CLEAR_DETAIL:
+      return {
+        ...state,
+        detail: [],
+      };
+    case CREATE_DOG:
+      return {
+        ...state,
+      };
+    case GET_TEMPERAMENTS:
+      return {
+        ...state,
+        temperaments: action.payload,
+      };
 
     default:
-      return { ...state };
+      return initialState;
   }
 };
 
