@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { filterByWeight } from '../redux/actions';
-import Styles from './FilterByWeight.module.css';
+import styles from './FilterByWeight.module.css';
 
 const FilterByWeight = ({ setCurrentPage, setOrder }) => {
   const dispatch = useDispatch();
@@ -14,10 +14,10 @@ const FilterByWeight = ({ setCurrentPage, setOrder }) => {
   };
 
   return (
-    <div className={Styles.container}>
+    <div className={styles.container}>
       <select
         onChange={(event) => handleChangeFilter(event)}
-        className={Styles.nameFilter}
+        className={styles.nameFilter}
         defaultValue=''
       >
         <option value=''>ORDER WEIGHT</option>

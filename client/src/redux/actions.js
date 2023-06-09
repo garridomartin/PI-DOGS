@@ -10,6 +10,8 @@ import {
   GET_TEMPERAMENTS,
   FILTER_CREATED,
   FILTER_BY_TEMPERAMENT,
+  SEARCH_NAME_ERROR,
+  SEARCH_NAME_SUCCESS,
 } from './indexTypes';
 
 const URL_BASE = 'http://localhost:3001/dogs';
@@ -47,21 +49,21 @@ export const dogsDetail = (id) => {
 
 export const searchByName = (name) => {
   return async (dispatch) => {
-    //try {
-    const apiData = await axios.get(`${URL_BASE}?name=${name}`);
-    return dispatch({
-      type: SEARCH_NAME,
-      payload: apiData.data,
-    });
-    //   } catch (error) {
-    //     const errorMessage = 'Error al realizar la búsqueda.';
-    //     return dispatch({
-    //      type: SEARCH_NAME,
-    //       payload: { error: errorMessage },
-    //     });
+    try {
+      const apiData = await axios.get(`${URL_BASE}?name=${name}`);
+      return dispatch({
+        type: SEARCH_NAME_SUCCESS,
+        payload: apiData.data,
+      });
+    } catch (error) {
+      const errorMessage = 'Error al realizar la búsqueda.';
+      return dispatch({
+        type: SEARCH_NAME_ERROR,
+        payload: errorMessage,
+      });
+    }
   };
 };
-//};
 
 export const clearDetail = () => {
   return {
@@ -80,6 +82,16 @@ export const postDog = ({
   temperamento,
 }) => {
   return async (dispatch) => {
+    console.log('Datos a enviar al servidor:', {
+      imagen,
+      name,
+      heightMin,
+      heightMax,
+      weightMin,
+      weightMax,
+      expectativaDeVida,
+      temperamento,
+    });
     await axios.post('http://localhost:3001/dogs', {
       imagen,
       name,
@@ -101,5 +113,20 @@ export const getTemperament = () => {
       type: GET_TEMPERAMENTS,
       payload: temp.data,
     });
+  };
+};
+
+export function filterTemperament(payload) {
+  return {
+    type: FILTER_BY_TEMPERAMENT,
+    payload,
+  };
+}
+
+export const filterCreated = (payload) => {
+  console.log(payload);
+  return {
+    type: FILTER_CREATED,
+    payload,
   };
 };

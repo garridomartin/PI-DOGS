@@ -9,20 +9,21 @@ import {
   GET_TEMPERAMENTS,
   FILTER_CREATED,
   FILTER_BY_TEMPERAMENT,
+  SEARCH_NAME_ERROR,
+  SEARCH_NAME_SUCCESS,
 } from './indexTypes';
 
 const initialState = {
   dogs: [],
   detail: [],
   backupDogs: [],
-  temperaments: [],
+  temperamentsArr: [],
 };
 
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
     case GET_DOGS:
-      return { ...state, dogs: action.payload };
-
+      return { ...state, dogs: action.payload, backupDogs: action.payload };
     case ORDER_BY_NAME:
       let sortedArr = [...state.dogs];
       sortedArr.sort((a, b) => {
@@ -37,7 +38,6 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         dogs: sortedArr,
       };
-
     case ORDER_BY_WEIGHT:
       let sortedArr3 = state.dogs.sort(function (a, b) {
         const weightA = Number(a.peso.split('-')[0]);
@@ -66,6 +66,18 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         dogs: action.payload,
       };
+    case SEARCH_NAME_SUCCESS:
+      return {
+        ...state,
+        dogs: action.payload,
+        error: null, // Limpiar el campo de error
+      };
+    case SEARCH_NAME_ERROR:
+      return {
+        ...state,
+        dogs: [],
+        error: action.payload, // Establecer el mensaje de error en el estado
+      };
     case CLEAR_DETAIL:
       return {
         ...state,
@@ -78,7 +90,36 @@ const rootReducer = (state = initialState, action) => {
     case GET_TEMPERAMENTS:
       return {
         ...state,
-        temperaments: action.payload,
+        temperamentsArr: action.payload,
+      };
+    case FILTER_BY_TEMPERAMENT:
+      let allDogs = state.dogs;
+      let temperamentFilter =
+        action.payload === 'ALL'
+          ? allDogs
+          : allDogs.filter((dog) => dog.temperamento?.includes(action.payload));
+      if (temperamentFilter.length === 0) {
+        temperamentFilter = [];
+      }
+      return {
+        ...state,
+        dogs: temperamentFilter,
+      };
+    case FILTER_CREATED:
+      const prueba = state.backupDogs;
+      let createFilter;
+
+      if (action.payload === 'ALL') {
+        createFilter = prueba;
+      } else {
+        createFilter =
+          action.payload === 'BDD'
+            ? prueba.filter((e) => e.created)
+            : prueba.filter((e) => !e.created);
+      }
+      return {
+        ...state,
+        dogs: createFilter,
       };
 
     default:

@@ -1,9 +1,9 @@
-const { DataTypes, BOOLEAN } = require("sequelize");
+const { DataTypes, BOOLEAN } = require('sequelize');
 
 module.exports = (sequelize) => {
   // defino el modelo
   sequelize.define(
-    "Dogs",
+    'Dogs',
     {
       id: {
         type: DataTypes.UUID,
@@ -30,10 +30,7 @@ module.exports = (sequelize) => {
 
       imagen: {
         type: DataTypes.STRING,
-        validate: {
-          isUrl: true,
-        },
-        allowNull: false,
+        allowNull: true,
       },
       created: { type: DataTypes.BOOLEAN, defaultValue: true },
     },

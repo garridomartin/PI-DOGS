@@ -1,6 +1,6 @@
 import React from 'react';
 import style from './SearchBar.module.css';
-import { useState } from 'react';
+import { useState, setCurrentPage } from 'react';
 import { useDispatch } from 'react-redux';
 import { searchByName } from '../redux/actions';
 import { Link } from 'react-router-dom';
@@ -17,6 +17,7 @@ const SearchBar = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault(event);
+
     dispatch(searchByName(name));
   };
 
