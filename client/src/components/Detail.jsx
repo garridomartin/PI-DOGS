@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams, Link } from 'react-router-dom';
 import { dogsDetail, clearDetail } from '../redux/actions';
@@ -8,6 +8,7 @@ const Detail = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
   const dogDetail = useSelector((state) => state.detail);
+  const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
     dispatch(dogsDetail(id));

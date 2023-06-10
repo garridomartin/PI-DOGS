@@ -23,11 +23,10 @@
 .Card img {
   width: auto;
   height: 90%;
-  max-width: 100%;
+  max-width: 95%;
   max-height: calc(100% - 30px);
   object-fit: contain;
   border-radius: 10px;
-  margin-left: 10px;
 }
 
 .Card .Title {
@@ -44,6 +43,11 @@
   margin-left: 10px;
 }
 
+.temper {
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
 @media (max-width: 1200px) {
   .Card {
     flex-basis: calc(45% - 10px);

@@ -14,15 +14,16 @@ import style from './Home.module.css';
 
 const Home = () => {
   const allDogs = useSelector((state) => state.dogs);
+  //const currentPage = useSelector((state) => state.currentPage);
+  //console.log(currentPage);
   //console.log(allDogs[0].temperamento);
   const [order, setOrder] = useState(1);
   const [currentPage, setCurrentPage] = useState(1);
   const [dogsPerPage] = useState(8);
-  const [previousPage, setPreviousPage] = useState(1); //! Estado para almacenar la página anterior, solucion pedida
 
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(getDogs());
+    allDogs.length === 0 && dispatch(getDogs()); //!SOLUCION AL REGRESO DE LOS FILTROS
   }, [dispatch]);
 
   //!PAGINADO
@@ -46,10 +47,8 @@ const Home = () => {
   }
 
   useEffect(() => {
-    const storedPage = localStorage.getItem('previousPage'); // Recuperar la página almacenada en localStorage SOLUC VUELTA DETAIL
-    const previousPage = storedPage ? parseInt(storedPage) : 1; // Convertir a número, si no está almacenada, usar 1 como valor predeterminado
-    setCurrentPage(previousPage);
-  }, []); // SE ejecuta solo una vez al cargar el componente
+    setCurrentPage(1);
+  }, [allDogs]);
 
   //!RELOAD
   const handleClick = (event) => {
@@ -86,9 +85,9 @@ const Home = () => {
             setOrder={setOrder}
           />
           <FilterByWeight
-            setCurrentPage={setCurrentPage}
             order={order}
             setOrder={setOrder}
+            setCurrentPage={setCurrentPage}
           />
         </div>
       </div>

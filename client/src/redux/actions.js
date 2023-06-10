@@ -10,8 +10,7 @@ import {
   GET_TEMPERAMENTS,
   FILTER_CREATED,
   FILTER_BY_TEMPERAMENT,
-  SEARCH_NAME_ERROR,
-  SEARCH_NAME_SUCCESS,
+  //SET_CURRENT_PAGE,
 } from './indexTypes';
 
 const URL_BASE = 'http://localhost:3001/dogs';
@@ -52,15 +51,11 @@ export const searchByName = (name) => {
     try {
       const apiData = await axios.get(`${URL_BASE}?name=${name}`);
       return dispatch({
-        type: SEARCH_NAME_SUCCESS,
+        type: SEARCH_NAME,
         payload: apiData.data,
       });
     } catch (error) {
-      const errorMessage = 'Error al realizar la búsqueda.';
-      return dispatch({
-        type: SEARCH_NAME_ERROR,
-        payload: errorMessage,
-      });
+      alert('Error al realizar la búsqueda.');
     }
   };
 };
@@ -92,6 +87,7 @@ export const postDog = ({
       expectativaDeVida,
       temperamento,
     });
+
     await axios.post('http://localhost:3001/dogs', {
       imagen,
       name,
@@ -100,6 +96,9 @@ export const postDog = ({
       expectativaDeVida: expectativaDeVida + ' years',
       temperamento,
     });
+
+    alert('Dog Created Success');
+
     dispatch({
       type: CREATE_DOG,
     });
@@ -130,3 +129,11 @@ export const filterCreated = (payload) => {
     payload,
   };
 };
+
+/*export const setCurrentPage = (payload) => {
+  //console.log(payload);
+  return {
+    type: SET_CURRENT_PAGE,
+    payload,
+  };
+};*/

@@ -9,8 +9,8 @@ import {
   GET_TEMPERAMENTS,
   FILTER_CREATED,
   FILTER_BY_TEMPERAMENT,
-  SEARCH_NAME_ERROR,
-  SEARCH_NAME_SUCCESS,
+  SET_CURRENT_FILTER,
+  SET_CURRENT_PAGE,
 } from './indexTypes';
 
 const initialState = {
@@ -18,6 +18,7 @@ const initialState = {
   detail: [],
   backupDogs: [],
   temperamentsArr: [],
+  currentPage: 1,
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -66,7 +67,7 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         dogs: action.payload,
       };
-    case SEARCH_NAME_SUCCESS:
+    /* case SEARCH_NAME_SUCCESS:
       return {
         ...state,
         dogs: action.payload,
@@ -77,7 +78,7 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         dogs: [],
         error: action.payload, // Establecer el mensaje de error en el estado
-      };
+      };*/
     case CLEAR_DETAIL:
       return {
         ...state,
@@ -108,7 +109,6 @@ const rootReducer = (state = initialState, action) => {
     case FILTER_CREATED:
       const prueba = state.backupDogs;
       let createFilter;
-
       if (action.payload === 'ALL') {
         createFilter = prueba;
       } else {
@@ -120,6 +120,13 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         dogs: createFilter,
+      };
+
+    case SET_CURRENT_PAGE:
+      // console.log(action.payload);
+      return {
+        ...state,
+        currentPage: action.payload,
       };
 
     default:

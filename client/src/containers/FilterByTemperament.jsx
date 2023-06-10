@@ -6,10 +6,15 @@ import style from './FilterByTemperament.module.css';
 export default function FilterByTemperament({ setCurrentPage, setOrder }) {
   const dispatch = useDispatch();
   const allTemperaments = useSelector((state) => state.temperamentsArr);
+  const allDogs = useSelector((state) => state.dogs);
 
   useEffect(() => {
     dispatch(getTemperament());
   }, [dispatch]);
+
+  useEffect(() => {
+    setCurrentPage('');
+  }, [allDogs]);
 
   function handleFilterTemp(e) {
     e.preventDefault();

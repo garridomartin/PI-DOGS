@@ -49,15 +49,20 @@ export const CreateDog = () => {
 
   function handleSubmit(e) {
     e.preventDefault();
-
     try {
       if (Object.values(input).some((value) => value === '')) {
         throw new Error('Please fill out all fields');
       }
+      const { heightMin, heightMax, weightMin, weightMax } = input;
+      if (heightMin >= heightMax || weightMin >= weightMax) {
+        return alert(
+          'CHECK HEIGTHS OR WEIGHTS, MINS MUST BE MAYORS THAN HIGHS'
+        );
+      }
 
       dispatch(postDog(input));
       console.log(input);
-      alert('Dog Created Success');
+      // alert('Dog Created Success');
       setInput({
         name: '',
         heightMin: '',
@@ -72,6 +77,7 @@ export const CreateDog = () => {
       alert(error.message);
     }
   }
+
   function handleDelete(e) {
     setInput({
       ...input,
@@ -104,7 +110,7 @@ export const CreateDog = () => {
                 <strong className={style.text1}>Minimun Height: </strong>
               </label>
               <input
-                type='text'
+                type='number'
                 value={input.heightMin}
                 name='heightMin'
                 onChange={(e) => handleChange(e)}
@@ -120,7 +126,7 @@ export const CreateDog = () => {
                 <strong className={style.text1}>Maximum Height: </strong>
               </label>
               <input
-                type='text'
+                type='number'
                 value={input.heightMax}
                 name='heightMax'
                 onChange={(e) => handleChange(e)}
@@ -136,7 +142,7 @@ export const CreateDog = () => {
                 <strong className={style.text1}>Minumun Weight: </strong>
               </label>
               <input
-                type='text'
+                type='number'
                 value={input.weightMin}
                 name='weightMin'
                 onChange={(e) => handleChange(e)}
@@ -152,7 +158,7 @@ export const CreateDog = () => {
                 <strong className={style.text1}>Maximum Weight: </strong>
               </label>
               <input
-                type='text'
+                type='number'
                 value={input.weightMax}
                 name='weightMax'
                 onChange={(e) => handleChange(e)}
@@ -208,6 +214,9 @@ export const CreateDog = () => {
                     return (
                       <option value={temp.name} key={temp.id}>
                         {temp.name}
+                        {errors.temperamento && (
+                          <p className='error'>{errors.temperamento}</p>
+                        )}
                       </option>
                     );
                   })}
@@ -234,8 +243,15 @@ export const CreateDog = () => {
         </div>
 
         <div>
-          <button type='submit' className={style.btnDog}>
-            Create your Doggie!
+          <button
+            className={style.btnDog}
+            disabled={
+              Object.values(input).some((value) => value === '') ||
+              (input.temperamento && input.temperamento.length === 0)
+            }
+            type='submit'
+          >
+            CREATE YOUR DOGGIE!!
           </button>
         </div>
 
