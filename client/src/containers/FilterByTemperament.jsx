@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { filterTemperament, getTemperament } from '../redux/actions';
-import style from './FilterByTemperament.module.css';
+import style from './FilterByAlphabet.module.css';
 
 export default function FilterByTemperament({ setCurrentPage, setOrder }) {
   const dispatch = useDispatch();

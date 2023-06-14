@@ -30,23 +30,23 @@
 @media screen and (max-width: 480px) {
   .nameFilter {
     backdrop-filter: blur(8px);
-    background-color: rgba(209, 209, 209, 0.289);
+    background-color: #dcd9f8;
     border: 2px solid rgba(0, 0, 0, 0.167);
     align-items: center;
     color: rgb(95, 95, 95);
     border: none;
     padding: 5px 8px;
+    font-size: 0.7em;
+    margin: 5px;
     border-radius: 5px;
     cursor: pointer;
-    margin: 5px;
-    font-size: 0.7em;
     text-transform: uppercase;
     letter-spacing: 1px;
     font-weight: bold;
     transition: all 0.2s ease-in-out;
     box-shadow: none;
     white-space: nowrap;
-    width: 100%; /* Ajusta el ancho según tus necesidades */
+    width: 100%;
   }
 
   .nameFilter:hover {

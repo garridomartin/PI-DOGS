@@ -54,7 +54,17 @@ export const CreateDog = () => {
         throw new Error('Please fill out all fields');
       }
       const { heightMin, heightMax, weightMin, weightMax } = input;
-      if (heightMin >= heightMax || weightMin >= weightMax) {
+      if (input.temperamento.length === 0) {
+        return alert('TEMPERAMENTS MUST BE SELECTED');
+      }
+      const parsedHeightMin = parseInt(heightMin, 10);
+      const parsedHeightMax = parseInt(heightMax, 10);
+      const parsedWeightMin = parseInt(weightMin, 10);
+      const parsedWeightMax = parseInt(weightMax, 10);
+      if (
+        parsedHeightMin >= parsedHeightMax ||
+        parsedWeightMin >= parsedWeightMax
+      ) {
         return alert(
           'CHECK HEIGTHS OR WEIGHTS, MINS MUST BE MAYORS THAN HIGHS'
         );
@@ -89,11 +99,10 @@ export const CreateDog = () => {
     <div className={style.container}>
       <form onSubmit={handleSubmit} className={style.form}>
         <h1 className={style.h1}>Create Your Dog</h1>
-
         <div className={style.super}>
           <form onSubmit={(e) => handleSubmit(e)}>
-            <div>
-              <label className={style.Lab}>
+            <div className={style.span}>
+              <label>
                 <strong className={style.text1}>Breed Name: </strong>
               </label>
               <input
@@ -101,13 +110,13 @@ export const CreateDog = () => {
                 value={input.name}
                 name='name'
                 onChange={(e) => handleChange(e)}
+                className='small-input'
               />
               {errors.name && <p className='error'>{errors.name}</p>}
             </div>
-
             <div>
               <label className={style.Lab}>
-                <strong className={style.text1}>Minimun Height: </strong>
+                <strong className={style.text1}>Minimum Height: </strong>
               </label>
               <input
                 type='number'
@@ -139,7 +148,7 @@ export const CreateDog = () => {
 
             <div>
               <label className={style.Lab}>
-                <strong className={style.text1}>Minumun Weight: </strong>
+                <strong className={style.text1}>Minimum Weight: </strong>
               </label>
               <input
                 type='number'
@@ -169,25 +178,26 @@ export const CreateDog = () => {
               {errors.weightMax && <p className='error'>{errors.weightMax}</p>}
             </div>
 
-            <div>
-              <label className={style.Lab}>
-                <strong className={style.text1}>Life Span: </strong>
+            <div className={style.span}>
+              <label>
+                <strong className={style.text1}>Life Span:</strong>
               </label>
               <input
-                type='text'
+                type='number'
                 value={input.expectativaDeVida}
                 name='expectativaDeVida'
                 onChange={(e) => handleChange(e)}
+                className='small-input'
               />
               <label>
-                <strong className={style.text1}> years</strong>
+                <strong className={style.text1}></strong>
               </label>
               {errors.expectativaDeVida && (
                 <p className='error'>{errors.expectativaDeVida}</p>
               )}
             </div>
 
-            <div>
+            <div className={style.span}>
               <label className={style.Lab}>
                 <strong className={style.text1}>Image: </strong>
               </label>
@@ -199,7 +209,7 @@ export const CreateDog = () => {
               />
             </div>
 
-            <div>
+            <div className={style.span}>
               <select onChange={(e) => handleSelect(e)}>
                 <option className={style.text1} value='selected' hidden>
                   Temperaments
@@ -243,14 +253,7 @@ export const CreateDog = () => {
         </div>
 
         <div>
-          <button
-            className={style.btnDog}
-            disabled={
-              Object.values(input).some((value) => value === '') ||
-              (input.temperamento && input.temperamento.length === 0)
-            }
-            type='submit'
-          >
+          <button className={style.btnDog} type='submit'>
             CREATE YOUR DOGGIE!!
           </button>
         </div>

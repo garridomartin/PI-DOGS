@@ -19,6 +19,7 @@ export const getDogs = () => {
   return async function (dispatch) {
     const apiData = await axios.get(`${URL_BASE}`);
     const dogs = apiData.data;
+    console.log(dogs);
     dispatch({ type: GET_DOGS, payload: dogs });
   };
 };
@@ -55,7 +56,7 @@ export const searchByName = (name) => {
         payload: apiData.data,
       });
     } catch (error) {
-      alert('Error al realizar la búsqueda.');
+      alert('Dog not found');
     }
   };
 };

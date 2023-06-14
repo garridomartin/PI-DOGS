@@ -3,7 +3,7 @@
   flex-basis: calc(15% + 7%);
   height: auto;
   border-radius: 10px;
-  padding: 2px;
+  padding: 0.5px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   background-color: #ffffff;
   transition: transform 0.3s ease;
@@ -21,12 +21,17 @@
 }
 
 .Card img {
-  width: auto;
-  height: 90%;
-  max-width: 95%;
-  max-height: calc(100% - 30px);
+  width: 100%;
+  height: auto;
+  max-height: calc(100% - 34px);
   object-fit: contain;
-  border-radius: 10px;
+  border-radius: 20px;
+  margin-bottom: 0.5px; /* Ajusta el valor del margen inferior según tus preferencias */
+}
+
+.Card p:not(.Title):last-child {
+  margin-top: 0px; /* Ajusta el valor del margen superior según tus preferencias */
+  margin-bottom: 0; /* Establece el margen inferior en 0 para eliminar cualquier espacio adicional */
 }
 
 .Card .Title {
@@ -34,10 +39,11 @@
   font-size: 1.2rem;
   font-family: Arial, Helvetica, sans-serif;
   margin-left: 10px;
+  align-items: center;
 }
 
 .Card p:not(.Title) {
-  margin: 1px 0;
+  margin: 2px 0;
   font-size: 1rem;
   font-family: Arial, Helvetica, sans-serif;
   margin-left: 10px;
@@ -48,24 +54,16 @@
   align-items: center;
   justify-content: center;
 }
-@media (max-width: 1200px) {
+
+/* Estilos responsive */
+@media screen and (max-width: 768px) {
   .Card {
-    flex-basis: calc(45% - 10px);
+    flex-basis: calc(30% + 7%);
   }
 }
 
-@media (max-width: 768px) {
+@media screen and (max-width: 576px) {
   .Card {
-    flex-basis: calc(90% - 10px);
-  }
-}
-
-@media (max-width: 480px) {
-  .Card {
-    flex-basis: calc(100% - 10px);
-    border: 1px solid black;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    border-radius: 0 0 15px 15px;
-    height: 40vh;
+    flex-basis: calc(50% + 7%);
   }
 }

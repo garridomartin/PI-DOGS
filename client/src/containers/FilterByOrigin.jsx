@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { filterCreated } from '../redux/actions';
-import style from './FilterByWeight.module.css';
+import style from './FilterByAlphabet.module.css';
 
 const FilterByOrigin = ({ setCurrentPage, setOrder }) => {
   const dispatch = useDispatch();

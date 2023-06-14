@@ -18,8 +18,25 @@ export default function Paginado({
   return (
     <nav>
       <div className={style.paginationCenter}>
-        <div className={style.number} onClick={pagePrev}>
+        <div className={style.numberFlechita} onClick={pagePrev}>
           «
+        </div>
+        <div>
+          {' '}
+          {[...Array(Math.ceil(allDogs / dogsPerPage))].map((_, index) => {
+            const pageNumber = index + 1;
+            return (
+              currentPage === pageNumber && (
+                <div
+                  className={`${style.numberFlechita} ${style.currentPageSquare}`}
+                  key={pageNumber}
+                  onClick={() => paginado(pageNumber)}
+                >
+                  {pageNumber}
+                </div>
+              )
+            );
+          })}{' '}
         </div>
         {pageNumber.map((number) => (
           <div
@@ -32,7 +49,7 @@ export default function Paginado({
             {number}
           </div>
         ))}
-        <div className={style.number} onClick={pageNext}>
+        <div className={style.numberFlechita} onClick={pageNext}>
           »
         </div>
       </div>

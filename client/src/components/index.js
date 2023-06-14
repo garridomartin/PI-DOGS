@@ -1,7 +1,6 @@
-import Detail from './Detail';
-import CreateDog from './CreateDog';
-import Home from './Home';
-import Landing from './Landing';
 import Card from './Card';
+import Paginado from './Paginado';
+import SearchBar from './SearchBar';
+import CardContainer from './CardContainer';
 
-export { Detail, CreateDog, Home, Landing, Card };
+export { Card, Paginado, SearchBar, CardContainer };

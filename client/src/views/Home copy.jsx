@@ -1,12 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getDogs } from '../redux/actions';
-import { Card } from './index';
+import { Card, Paginado, SearchBar } from '../components/index';
 import {
-  Paginado,
   FilterByAlphabet,
   FilterByWeight,
-  SearchBar,
   FilterByOrigin,
   FilterByTemperament,
 } from '../containers/index';
@@ -14,6 +12,7 @@ import style from './Home.module.css';
 
 const Home = () => {
   const allDogs = useSelector((state) => state.dogs);
+  console.log(allDogs);
   //const currentPage = useSelector((state) => state.currentPage);
   //console.log(currentPage);
   //console.log(allDogs[0].temperamento);
@@ -23,8 +22,8 @@ const Home = () => {
 
   const dispatch = useDispatch();
   useEffect(() => {
-    allDogs.length === 0 && dispatch(getDogs()); //!SOLUCION AL REGRESO DE LOS FILTROS
-  }, [dispatch]);
+    !allDogs.length && dispatch(getDogs()); //!SOLUCION AL REGRESO DE LOS FILTROS
+  }, [dispatch, allDogs]);
 
   //!PAGINADO
   const getCurrentDogs = () => {
@@ -63,7 +62,7 @@ const Home = () => {
       </div>
 
       <div>
-        <button className={style.button} onClick={handleClick}>
+        <button className={style.nameFilter} onClick={handleClick}>
           RESET FILTERS
         </button>
         <FilterByOrigin

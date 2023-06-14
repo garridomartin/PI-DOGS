@@ -1,5 +1,5 @@
 import React from 'react';
-import style from '../components/CreateDog.module.css';
+import style from '../views/CreateDog.module.css';
 
 const validate = (input) => {
   const error = {};
@@ -19,20 +19,24 @@ const validate = (input) => {
   ];
 
   errorNum.forEach((value) => {
-    if (input[value] === '' || isNaN(input[value])) {
+    if (input[value] === '' || isNaN(parseFloat(input[value]))) {
       error[value] = `🔺${value} is required`;
-    } else if (input[value] < 0 || input[value] > 200) {
-      error[value] = `🔺${value} must be a number between 0 and 200`;
     }
   });
 
-  if (input['min'] && input['max'] && input['min'] > input['max']) {
-    error['min'] = '🔺min cannot be greater than max';
-    error['max'] = '🔺max cannot be less';
-  }
+  if (
+    parseFloat(input['heightMin']) > parseFloat(input['heightMax']) ||
+    parseFloat(input['weightMin']) > parseFloat(input['weightMax'])
+  ) {
+    if (parseFloat(input['heightMin']) > parseFloat(input['heightMax'])) {
+      error['heightMin'] = '🔺heightMin must be less than heightMax';
+      error['heightMax'] = '🔺heightMax must be greater than heightMin';
+    }
 
-  if (!input.temperamento) {
-    error.temperamento = 'Temperament is required!';
+    if (parseFloat(input['weightMin']) >= parseFloat(input['weightMax'])) {
+      error['weightMin'] = '🔺weightMin must be less than weightMax';
+      error['weightMax'] = '🔺weightMax must be greater than weightMin';
+    }
   }
 
   return error;

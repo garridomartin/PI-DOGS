@@ -1,6 +1,6 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
-import { Detail, CreateDog, Home, Landing } from './components/index';
+import { Detail, CreateDog, Home, Landing } from './views/index';
 
 /* 
 import SearchBar from './components/SearchBar';
