@@ -45,14 +45,17 @@ const CardContainer = () => {
 
   return (
     <>
-      <Paginado
-        dogsPerPage={dogsPerPage}
-        allDogs={allDogs.length}
-        pagePrev={pagePrev}
-        paginado={paginado}
-        pageNext={pageNext}
-        currentPage={currentPage} // solucion al resaltado de la pagina actual en el paginado
-      />
+      <div className={style.paginadoContainer}>
+        <Paginado
+          dogsPerPage={dogsPerPage}
+          allDogs={allDogs.length}
+          pagePrev={pagePrev}
+          paginado={paginado}
+          pageNext={pageNext}
+          currentPage={currentPage} // solucion al resaltado de la pagina actual en el paginado
+        />
+      </div>
+
       <div className={style.container}>
         <div className={style.CardsContainer}>
           {currentDogs[0] ? (
@@ -64,7 +67,7 @@ const CardContainer = () => {
                 altura={dog.altura}
                 peso={dog.peso}
                 expectativaDeVida={dog.expectativaDeVida}
-                temperamento={dog.temperamento}
+                temperamento={dog.temperamento.join(', ')}
                 imagen={dog.imagen}
               />
             ))

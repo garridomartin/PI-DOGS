@@ -35,14 +35,22 @@ const Detail = () => {
           )}
           <div>
             <h3 className={style.title}>{dog.name}</h3>
-            <p className={style.text}>Altura: {dog.altura} cm.</p>
-            <p className={style.text}>Peso: {dog.peso} kg.</p>
             <p className={style.text}>
-              Expectativa de vida: {dog.expectativaDeVida}
+              <strong>Altura: </strong>
+              {dog.altura} cm.
+            </p>
+            <p className={style.text}>
+              <strong>Peso: </strong>
+              {dog.peso} kg.
+            </p>
+            <p className={style.text}>
+              <strong>Expectativa de vida: </strong>
+              {dog.expectativaDeVida}
             </p>
             {dog.temperamento && (
               <p className={style.text}>
-                Temperamento: {dog.temperamento.join(', ')}
+                <strong>Temperamento: </strong>
+                {dog.temperamento.join(', ')}
               </p>
             )}
           </div>

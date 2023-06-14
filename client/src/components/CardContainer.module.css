@@ -5,13 +5,19 @@ body {
 .CardsContainer {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: center;
   gap: 1em;
   max-width: 95%;
   margin: 0 auto;
   padding-top: 0.5em;
   background-color: #d2bead;
   height: min-content;
+}
+
+.paginadoContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .container {

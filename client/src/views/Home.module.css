@@ -5,7 +5,8 @@ body {
 .CardsContainer {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: center;
+  align-items: center;
   gap: 1em;
   max-width: 95%;
   margin: 0 auto;

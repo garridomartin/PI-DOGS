@@ -16,9 +16,12 @@ const Card = ({ name, peso, temperamento, imagen, id }) => {
   return (
     <div className={style.Card}>
       <p className={style.Title}>{name}</p>
-      <p>Peso: {peso} kg.</p>
       <p>
-        Temperamento:
+        <strong>Peso:</strong> {peso}
+      </p>
+      <p>
+        <strong>Temperamento:</strong>
+
         {temperamento.map((temp) => (
           <a className={style.temper}> {temp} </a>
         ))}

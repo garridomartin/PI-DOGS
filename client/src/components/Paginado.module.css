@@ -1,6 +1,6 @@
 .paginationCenter {
-  display: flex;
   flex-flow: row wrap;
+  display: flex;
   justify-content: center;
   gap: 8px;
   padding: 12px 0;
@@ -25,7 +25,10 @@
   letter-spacing: 1px;
   transition: all 0.2s ease-in-out;
   box-shadow: none;
+  display: flex;
+  justify-content: center;
 }
+
 .currentPageSquare {
   display: none;
 }
